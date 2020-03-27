@@ -1,0 +1,81 @@
+ <ion-list *ngIf = "question" inset>
+
+	<ion-list-header>{{question.translations?.en}}</ion-list-header>
+
+	<ng-container [ngSwitch] = "question.type">
+
+		<ion-item 
+			*ngSwitchCase 	= "{float: question.type, integer: question.type}[question.type]"
+		>			
+			<ion-input			
+				type      		= "number" 
+				[min]			= "question.min != undefined ? question.min : null"
+				[max]			= "question.max != undefined ? question.max : null"
+				[inputmode]		= "{float:'decimal', integer:'numeric'}[question.tyope]"
+				[formControl] 	= "question.answerFormControl"
+			></ion-input>  
+		</ion-item>
+
+		<ion-radio-group
+			*ngSwitchCase	= "'boolean'"
+			[formControl] 	= "question.answerFormControl"      
+		>
+			<ion-item>
+				<ion-label>Yes</ion-label>
+				<ion-radio slot = "end" [value]="true"></ion-radio>
+			</ion-item>
+
+			<ion-item>
+				<ion-label>No</ion-label>
+				<ion-radio slot = "end" [value]="false"></ion-radio>
+			</ion-item>
+		</ion-radio-group>
+
+		<ion-item *ngSwitchCase = "'unknown'">			
+			<ion-input			
+				type      		= "text" 
+				[formControl] 	= "question.answerFormControl"
+			></ion-input>  
+		</ion-item>
+
+		
+		<ion-item *ngSwitchCase = "'string'">
+			<ion-input			
+				*ngIf			= "!question.options"
+				type      		= "text" 
+				[formControl] 	= "question.answerFormControl"
+			></ion-input>  
+
+			<ion-select 
+				*ngIf			= "question.options"
+				placeholder		= "SELECT_ONE"
+				interface		= "action-sheet"
+				[formControl] 	= "question.answerFormControl"
+			>
+      			<ion-select-option 
+      				*ngFor		= "let option of question.options"
+      				[value] 	= "option.value" 
+      			>
+      				{{option.translations.en}}
+      			</ion-select-option>
+      		</ion-select>
+
+		</ion-item>
+
+
+		<ion-item *ngSwitchDefault>
+			<ion-input			
+				type      		= "text" 
+				[formControl] 	= "question.answerFormControl"
+			></ion-input>  
+		</ion-item>
+
+		<ion-note 
+			color 	= "danger" 
+		>
+			{{question.answerFormControl.errors?.questionTypeConstraints?.message || '&nbsp;'}}
+		</ion-note>
+
+	</ng-container>	
+</ion-list>
+	

@@ -1,0 +1,57 @@
+ <ion-list *ngIf = "question" inset lines = "none">
+
+	<ion-list-header><ion-label>{{question.translations?.en}}</ion-label></ion-list-header>
+
+	<ion-item lines = "full" *ngIf = "question.type != 'boolean'">
+		<ion-input			
+			type      		= "text" 
+			[formControl] 	= "question.answerFormControl"
+			debounce 		= "1000"
+		></ion-input>  
+	</ion-item>
+	
+	<ion-radio-group 
+		*ngIf 			= "question.type == 'boolean'"
+		[formControl] 	= "question.answerFormControl"
+	>
+
+		<ion-item>
+			<ion-label>yes/true</ion-label>	
+			<ion-radio [value] = "true" slot = "end"></ion-radio>
+		</ion-item>	
+
+		<ion-item>
+			<ion-label>no/false</ion-label>	
+			<ion-radio [value] = "false" slot = "end"></ion-radio>
+		</ion-item>	
+
+	</ion-radio-group>
+
+
+	<ion-item>
+		<ion-note>
+			<span *ngFor =" let option of question.options; last as isLast">
+				{{option.value}} {{isLast ? '' : ','}}
+			</span>			
+			<span *ngIf ="question.min">
+				min: {{question.min}}
+			</span>			
+			<span *ngIf ="question.max">
+				max: {{question.max}}
+			</span>
+			&nbsp;
+		</ion-note>
+	</ion-item>
+
+	
+
+	<ion-item>
+		<ion-note 
+			color 	= "danger" 
+		>
+			{{question.answerFormControl.errors?.questionTypeConstraints?.message || '&nbsp;'}}
+		</ion-note>
+	</ion-item>
+
+</ion-list>
+	
