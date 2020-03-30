@@ -10,7 +10,7 @@ import 	{ 	IonicModule }				from '@ionic/angular'
 import 	{ 	QueryRunComponent }			from './query-run.component'
 import	{	
 			BestWidgetMatchPipe,
-			InjectQuestionPipe, 
+			InjectQueryPipe, 
 		}								from './best-widget-match.pipe'
 
 
@@ -28,7 +28,7 @@ import	{	Questionaire }				from '../questionaire'
 	declarations: [
 		QueryRunComponent,    
 		BestWidgetMatchPipe,
-		InjectQuestionPipe,
+		InjectQueryPipe,
 	],
 	exports: [
 		QueryRunComponent,

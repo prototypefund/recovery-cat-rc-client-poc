@@ -12,9 +12,7 @@ export class Tab1Page {
 
 	constructor(questionaire: Questionaire){
 
-		questionaire.getQuestions(['A', 'B', 'C', 'D', 'E', 'F', 'G'])
-		.subscribe({next: q => this.questions.push(q)})
-
+	
 	}
 
 }

@@ -1,8 +1,15 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>
+			RecoveryCat
+		</ion-title>
+	</ion-toolbar>
+</ion-header>
+
 <ion-content 
-	fullscreen 
-	class		= "ion-padding" 
 	scroll-y	= "false"
 >
+
 	<ion-slides 
 		pager					= "false" 
 		[options]				= "slideOpts"
@@ -10,49 +17,50 @@
 		(ionSlidesDidLoad)		= "afterSlideChange()"
 	>
 		<ion-slide 
-			*ngFor = "let question of questions trackBy: trackSlides"			
+			*ngFor = "let query of queries trackBy: trackSlides"			
 		>
 			<ng-container 
-				[ngComponentOutlet] 			= "question | bestWidgetMatch" 
-				[ngComponentOutletInjector] 	= "question | injectQuestion"
-				(onInit) 						= "console.log(99)"
+				[ngComponentOutlet] 			= "query | bestWidgetMatch" 
+				[ngComponentOutletInjector] 	= "query | injectQuery"
 			></ng-container>    
 
 
 		</ion-slide>
 	</ion-slides>
 
+</ion-content>
 
-	<ion-fab vertical="bottom" horizontal="start" slot="fixed">
-		<ion-fab-button 
-			color		= "dark"
+<ion-footer color = "primary">
+	<ion-toolbar>
+
+		<ion-button 
+			color		= "medium"
+			fill		= "clear"
 			[disabled] 	= "atStart"
 			(click) 	= "slides.slidePrev()"
+			slot		= "start"
 		>
 			<ion-icon md="caret-back" ios="chevron-back-circle-outline"></ion-icon>
-		</ion-fab-button>
-	</ion-fab>
+		</ion-button>
 
-	<ion-fab vertical="bottom" horizontal="center" slot="fixed">
-		<ion-fab-button
+		<ion-button
 			color		= "success"
-			[disabled] 	= "!activeQuestion?.complete"
+			[disabled] 	= "!activeQuery?.complete"
 			(click)		= "checkOff()"
+			expand		= "block"
 		>
 			<ion-icon name="checkmark"></ion-icon>
-		</ion-fab-button>
-	</ion-fab>
+		</ion-button>
 
-	<ion-fab vertical="bottom" horizontal="end" slot="fixed">
-		<ion-fab-button 		
-			color		= "dark"
+		<ion-button 		
+			color		= "medium"
+			fill		= "clear"
 			[disabled] 	= "atEnd"
 			(click) 	= "slides.slideNext()"
+			slot		= "end"
 		>
 			<ion-icon md="caret-forward" ios="chevron-forward-circle-outline"></ion-icon>
-		</ion-fab-button>
-	</ion-fab>
-
-
-
-</ion-content>
+		</ion-button>			
+		
+	</ion-toolbar>	
+</ion-footer>

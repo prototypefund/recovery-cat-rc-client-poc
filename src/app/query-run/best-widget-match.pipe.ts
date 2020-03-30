@@ -8,10 +8,10 @@ import 	{
 
 import	{	
 			QWCService,
-			QueryWidgetQuestionToken,
+			QueryToken,
 		}								from './query-widget-components.service'
 
-import	{	Question }					from '../questionaire'
+import	{	Query }						from '../reports'
 
 
 @Pipe({
@@ -21,25 +21,25 @@ export class BestWidgetMatchPipe implements PipeTransform {
 
 	constructor(private QWCService: QWCService){}
 
-	transform(question: Question): ComponentRef<any> {		
-		return 	this.QWCService.getQWCByPriority(question)[0]
+	transform(query: Query): ComponentRef<any> {		
+		return 	this.QWCService.getQWCByPriority(query.question)[0]
 	}
 }
 
 @Pipe({
-	name: 'injectQuestion'
+	name: 'injectQuery'
 })
 
-export class InjectQuestionPipe implements PipeTransform {
+export class InjectQueryPipe implements PipeTransform {
 
 	constructor(private injector: Injector){}
 
-	transform(question: Question): Injector { 
+	transform(query:Query): Injector { 
 		return 	Injector.create({
 					providers: 	[
 									{
-										provide: 	QueryWidgetQuestionToken, 
-										useValue: 	question
+										provide: 	QueryToken, 
+										useValue: 	query
 									}
 								], 
 					parent:		this.injector

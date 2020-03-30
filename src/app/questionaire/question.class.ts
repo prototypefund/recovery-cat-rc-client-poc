@@ -13,8 +13,16 @@ import	{
 import 	{ 	
 			Observable,
 			from,
+			of,
+			defer,
+			throwError,
+			interval
 		} 							from 'rxjs'
 
+import 	{
+			take,
+			switchMap
+		}							from 'rxjs/operators'
 
 
 import	{	QuestionConfig }		from './question-config.interface'
@@ -28,15 +36,14 @@ import	{
 export class Question implements QuestionConfig{
 	
 	private _config: 	QuestionConfig
-	private _error:		any 				= null
 
 	public id
 	public type
 	public meaning
 	public translations
 
-	public storedAnswers: 		any[]
 	public answerFormControl: 	FormControl 
+
 
 
 	private unknownConfig(id:string): QuestionConfig{
@@ -52,11 +59,10 @@ export class Question implements QuestionConfig{
 	constructor(config:QuestionConfig) 
 	constructor(idOrConfig: string | QuestionConfig){ 
 
+
 		this._config	=	typeof idOrConfig == 'string'
 							?	this.unknownConfig(idOrConfig)
 							:	idOrConfig
-
-		this.answerFormControl = new FormControl('', [], [this.asyncValidatorFn] )						
 
 		for(let key in this._config) Object.defineProperties(this, {[key]: {get: ()=> this._config[key]}})
 
@@ -76,23 +82,17 @@ export class Question implements QuestionConfig{
 
 	}
 
-	set answer(value){		
-		this.answerFormControl.setValue(value)
-	}
 
-	get answer(){
-		return this.answerFormControl.value
-	}
+	// public report$(): Observable<any>{
 
-	get complete(){
-		return this.answerFormControl.valid
-	}
+	// 	return	defer( () => {  
+	// 				return	this.answerFormControl.pending
+	// 						?	this.answerFormControl.statusChanges.pipe(take(1))
+	// 						:	of(this.answerFormControl.status)
+	// 			})
+	// 			.pipe( switchMap( (status) => status == 'VALID' ? of('läuft') : throwError('ANSWER_INVALID') ))
+	// 			//TODO Error handling!
 
-
-	public store(): Observable<any>{
-		if(!this.complete) throw "QUESTION_NOT_COMPLETE"
-		console.log('mock: store', this.asnwer)
-		return from([])	
-	}
+	// }
 
 }

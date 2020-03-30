@@ -10,7 +10,7 @@ import	{
 import	{	Question }				from '../questionaire/question.class'
 
 
-export const QueryWidgetQuestionToken = new InjectionToken<string>('question'); 
+export const QueryToken = new InjectionToken<string>('query'); 
 
 interface QWCConfig {
 	component:			ComponentRef<any>,

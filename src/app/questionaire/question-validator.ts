@@ -57,6 +57,13 @@ async function stringCheckType(value:any, config:QuestionConfig):Promise<object|
 	return null
 }
 
+async function stringCheckEmpty(value:any, config:QuestionConfig):Promise<object|null>{ 
+	if(config.type != 'string') 	return null
+	if(value == "")					throw new QuestionValidationError('EMPTY_STRING', value, config)
+
+	return null
+}
+
 async function stringCheckOptions(value:any, config:QuestionConfig):Promise<object|null>{ 
 	if(config.type != 'string') 	return null
 	if(config.options == undefined)	return null
@@ -156,6 +163,7 @@ async function undefinedCheck(value:any, config:QuestionConfig):Promise<object|n
 
 QuestionValidator.register([
 	stringCheckType,
+	stringCheckEmpty,
 	stringCheckOptions,
 	integerCheckType,
 	integerCheckBounds,

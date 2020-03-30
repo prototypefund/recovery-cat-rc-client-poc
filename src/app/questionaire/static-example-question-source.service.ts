@@ -102,8 +102,8 @@ export class StaticExampleQuestionSource implements QuestionSource {
 					}
 				]
 
-	public get(ids: string[]): Observable<QuestionConfig>{
-		return from(this.questions.filter(q => ids.includes(q.id)))
+	public async get(ids: string[]): Promise<QuestionConfig[]>{
+		return Promise.resolve( this.questions.filter(q => ids.includes(q.id)) ) 
 	}
 
 }

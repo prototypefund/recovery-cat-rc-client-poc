@@ -1,18 +1,18 @@
- <ion-list *ngIf = "question" inset lines = "none">
+ <ion-list *ngIf = "query && query.question" inset lines = "none">
 
-	<ion-list-header><ion-label>{{question.translations?.en}}</ion-label></ion-list-header>
+	<ion-list-header><ion-label>{{query.question.translations?.en}}</ion-label></ion-list-header>
 
-	<ion-item lines = "full" *ngIf = "question.type != 'boolean'">
+	<ion-item lines = "full" *ngIf = "query.question.type != 'boolean'">
 		<ion-input			
 			type      		= "text" 
-			[formControl] 	= "question.answerFormControl"
-			debounce 		= "1000"
+			[formControl] 	= "query.answerFormControl"
+			debounce 		= "500"
 		></ion-input>  
 	</ion-item>
 	
 	<ion-radio-group 
-		*ngIf 			= "question.type == 'boolean'"
-		[formControl] 	= "question.answerFormControl"
+		*ngIf 			= "query.question.type == 'boolean'"
+		[formControl] 	= "query.answerFormControl"
 	>
 
 		<ion-item>
@@ -30,14 +30,14 @@
 
 	<ion-item>
 		<ion-note>
-			<span *ngFor =" let option of question.options; last as isLast">
+			<span *ngFor =" let option of query.question.options; last as isLast">
 				{{option.value}} {{isLast ? '' : ','}}
 			</span>			
-			<span *ngIf ="question.min">
-				min: {{question.min}}
+			<span *ngIf ="query.question.min">
+				min: {{query.question.min}}
 			</span>			
-			<span *ngIf ="question.max">
-				max: {{question.max}}
+			<span *ngIf ="query.question.max">
+				max: {{query.question.max}}
 			</span>
 			&nbsp;
 		</ion-note>
@@ -49,7 +49,7 @@
 		<ion-note 
 			color 	= "danger" 
 		>
-			{{question.answerFormControl.errors?.questionTypeConstraints?.message || '&nbsp;'}}
+			{{query.answerFormControl.errors?.questionTypeConstraints?.message || '&nbsp;'}}
 		</ion-note>
 	</ion-item>
 

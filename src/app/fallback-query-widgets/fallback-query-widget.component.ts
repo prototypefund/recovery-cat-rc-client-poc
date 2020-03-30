@@ -14,9 +14,9 @@ import 	{
 			Validators 
 		} 									from '@angular/forms';
 
-import	{	QueryWidgetQuestionToken }		from '../query-run/query-widget-components.service'
+import	{	QueryToken }					from '../query-run/query-widget-components.service'
 import	{	RegisterQWC }					from '../query-run/query-widget-component.decorator'
-import	{	Question }						from '../questionaire/question.class'
+import	{	Query }							from '../reports'
 
 
 @RegisterQWC({
@@ -31,16 +31,16 @@ import	{	Question }						from '../questionaire/question.class'
 })
 export class FallbackQueryWidgetComponent implements OnInit,OnDestroy {
 
-	public question: 	Question
+	public query: 	Query
 	public unsubscribe
 
-	constructor(@Inject(QueryWidgetQuestionToken) question: Question){
-		this.question 		= question
-		this.unsubscribe 	= question.answerFormControl.valueChanges.subscribe({
+	constructor(@Inject(QueryToken) query: Query){
+		this.query 			= query
+		this.unsubscribe 	= query.answerFormControl.valueChanges.subscribe({
 			next : value => {
-				if(question.type == 'string' 	&& typeof value != 'string') 	this.question.answerFormControl.setValue(String(value))
-				if(question.type == 'float'		&& typeof value != 'number') 	this.question.answerFormControl.setValue(Number(value)||0)
-				if(question.type == 'integer'	&& typeof value != 'number') 	this.question.answerFormControl.setValue(Number(value)||0)				
+				if(query.question.type == 'string' 	&& typeof value != 'string') 	this.query.answerFormControl.setValue(String(value))
+				if(query.question.type == 'float'	&& typeof value != 'number') 	this.query.answerFormControl.setValue(Number(value)||0)
+				if(query.question.type == 'integer'	&& typeof value != 'number') 	this.query.answerFormControl.setValue(Number(value)||0)				
 			}
 		})
 	}

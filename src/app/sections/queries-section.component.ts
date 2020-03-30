@@ -1,5 +1,7 @@
 import { 	Component } 		from '@angular/core';
 import { 	Questionaire }		from '../questionaire'
+import { 	ReportingService }	from '../reports'
+import { 	SchedulingService }	from '../services'
 
 @Component({	
 	templateUrl:	'./queries-section.component.html',
@@ -7,14 +9,18 @@ import { 	Questionaire }		from '../questionaire'
 })
 export class QueriesSection {
 
-	public questions = []
+	public queries = []
 
-	constructor(questionaire: Questionaire){
+	constructor(
+		private questionaire: 		Questionaire,
+		private reportingService: 	ReportingService,
+		private schedulingService: 	SchedulingService,
+	){
 
-		questionaire.getQuestions(['A', 'B', 'C', 'D', 'E', 'F', 'G'])
-		.subscribe({
-			next: q => this.questions.push(q)
-		})
+		Promise.resolve(schedulingService.getDue())
+		.then(ids 		=> this.reportingService.createQueryRun(ids))
+		.then(queries	=> this.queries = queries)
+		.catch( e => {console.log(e); throw e})
 
 	}
 	

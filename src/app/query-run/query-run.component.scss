@@ -1,7 +1,7 @@
 :host {
 	height:			100%;
-	flex-direction:	column;
 	display:		flex;
+	flex-direction:	column;
 }
 
 ion-content {
@@ -13,5 +13,4 @@ ion-slides {
 }
 
 ion-slide {
-	height:			100%;
 }

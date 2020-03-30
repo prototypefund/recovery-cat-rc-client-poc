@@ -6,13 +6,11 @@ import 	{
 			Input,
 			ViewChild
 		}     								from '@angular/core'
-//import	{	DefaultQueryWidgetComponent	}	from '../fallback-query-widgets/fallback-query-widget.component'
-import	{	
-			Question,
-			Questionaire
-		}									from '../questionaire'
-
 import 	{ 	IonSlides } 					from '@ionic/angular';
+import	{	
+			Query
+		}									from '../reports'
+
 
 
 @Component({
@@ -20,7 +18,7 @@ import 	{ 	IonSlides } 					from '@ionic/angular';
 	templateUrl:   './query-run.component.html',
 	styleUrls:     ['./query-run.component.scss']
 })
-export class QueryRunComponent implements OnInit, AfterViewInit {
+export class QueryRunComponent {
 
 	public slideOpts = 	{
 							initialSlide:	0,
@@ -29,35 +27,30 @@ export class QueryRunComponent implements OnInit, AfterViewInit {
 
 	@ViewChild(IonSlides,	{static:true}) 	slides: IonSlides
 
-	@Input() questions:Question[] = []
+	@Input() queries:Query[] = []
 
 	public	atStart:			boolean 	= true
 	public	atEnd:				boolean 	= false
-	public 	activeQuestion:		Question 
+	public 	activeQuery:		Query 
 
-	private questionOnSlide:	Question[] 	= []
+	private queryOnSlide:		Query[] 	= []
 
-	constructor(private questionaireService:Questionaire) {
+	constructor() {
 		
 	}
 
 	get trackSlides(){
-
-		let questionOnSlide = this.questionOnSlide
-
-		return 	function(index, question){
-					questionOnSlide[index] = question
-					return question		
-				}
+		return 	function(index, query){
+					this.queryOnSlide[index] = query
+					return query		
+				}.bind(this)
 	}
 
 	checkOff(){
-		let activeQuestion	= this.activeQuestion
+		let activeQuery	= this.activeQuery
 
-		this.activeQuestion.store()
-		.subscribe({
-			complete: () => {	if(activeQuestion == this.activeQuestion) this.slides.slideNext() }
-		})
+		this.activeQuery.submit()
+		.then( () => (activeQuery == this.activeQuery) && this.slides.slideNext() )
 	}
 
 	afterSlideChange(){
@@ -68,15 +61,9 @@ export class QueryRunComponent implements OnInit, AfterViewInit {
 		this.slides.isEnd()
 		.then( result => this.atEnd = result )
 
-		this.slides.getActiveIndex().then( index => this.activeQuestion = this.questionOnSlide[index] )
+		this.slides.getActiveIndex().then( index => this.activeQuery = this.queryOnSlide[index] )
 	}
 
-
-	ngAfterViewInit(){
-	}
-
-	ngOnInit() {
-	}
 
 }
 

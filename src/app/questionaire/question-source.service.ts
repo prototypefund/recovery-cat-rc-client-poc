@@ -8,6 +8,6 @@ export interface QuestionSourceClass {
 }	
 
 export interface QuestionSource {
-	get(ids:string[]):Observable<QuestionConfig>
+	get(ids:string[]):Promise<QuestionConfig[]>
 }
 
