@@ -49,15 +49,16 @@ export class QWCService{
 	constructor(){}
 
 	public getQWCByPriority(question: Question): ComponentRef<any>[] {
+
 		return	QWCService.QWCConfigs
-				.map( (config: QWCConfig) => ({					
-					component:	config.component,
-					match:		config.getWidgetMatch(question),
-					priority:	config.priority || 0
-				}))
-				.sort( (item1, item2) => {
-					return Math.sign(item1.priority - item2.priority) || Math.sign(item1.match - item2.match)
-				})
-				.map( item => item.component)
+				.map( 		config 			=> ({					
+													component:	config.component,
+													match:		config.getWidgetMatch(question),
+													priority:	config.priority || 0
+												})
+				)
+				.filter(	item 			=> item.match >= 0 )
+				.sort( 		(item1, item2) 	=> Math.sign(item2.match - item1.match) || Math.sign(item2.priority - item1.priority) )
+				.map( 		item 			=> item.component)
 	}
 }

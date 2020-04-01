@@ -1,3 +1,33 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+	<ion-router-outlet id ="main"></ion-router-outlet>
+
+	<ion-menu side="start" menuId="first" contentId="main">
+		<ion-header>
+			<ion-toolbar>
+				<ion-title>RecoveryCat</ion-title>
+			</ion-toolbar>
+		</ion-header>
+		<ion-content>
+			<ion-list>
+
+				<ion-menu-toggle>
+					<ion-item routerLink = "reporting-schedules">
+						<ion-icon name="time-outline" slot = "start"></ion-icon>
+						Report Schedules
+					</ion-item>
+				</ion-menu-toggle>	
+				
+				<ion-menu-toggle>
+					<ion-item routerLink = "query-run">
+						<ion-icon name="time-outline" slot = "start"></ion-icon>
+						Due Reports
+						<ion-badge slot ="end">2</ion-badge>
+					</ion-item>
+				</ion-menu-toggle>
+				<ion-item>Menu Item</ion-item>
+				<ion-item>Menu Item</ion-item>
+			</ion-list>
+		</ion-content>
+	</ion-menu>
+
 </ion-app>

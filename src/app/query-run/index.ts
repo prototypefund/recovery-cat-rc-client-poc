@@ -1,2 +1,5 @@
-export	*			from './query-run.component'
-export	*			from './query-run.module'
+export	*	from './query-run.component'
+export	*	from './query-run.module'
+export	*	from './query-widget-components.service'
+export	*	from './query-widget-component.decorator'
+export	*	from './query-run.pipes'

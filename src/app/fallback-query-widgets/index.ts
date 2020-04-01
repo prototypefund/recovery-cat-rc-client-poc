@@ -2,15 +2,16 @@ import 	{
 			NgModule,
 			Inject,
 			ComponentFactoryResolver
-		}									from '@angular/core'
-import 	{ 	CommonModule }					from '@angular/common'
+		}											from '@angular/core'
+import 	{ 	CommonModule }							from '@angular/common'
 
-import 	{	ReactiveFormsModule } 			from '@angular/forms';
+import 	{	ReactiveFormsModule } 					from '@angular/forms';
 
-import 	{ 	IonicModule }					from '@ionic/angular'
-import	{	FallbackQueryWidgetComponent }	from './fallback-query-widget.component'
+import 	{ 	IonicModule }							from '@ionic/angular'
+import	{	FallbackQueryWidgetComponent }			from './fallback-query-widget.component'
+import	{	FallbackQueryWidgetUnknownComponent }	from './fallback-query-widget-unknown.component'
 
-import	{	QWCModule }						from '../query-run/query-widget-components.module'
+import	{	QWCModule }								from '../query-run/query-widget-components.module'
 
 
 @NgModule({
@@ -20,10 +21,12 @@ import	{	QWCModule }						from '../query-run/query-widget-components.module'
 		ReactiveFormsModule,
 	],
 	declarations:[
-		FallbackQueryWidgetComponent
+		FallbackQueryWidgetComponent,
+		FallbackQueryWidgetUnknownComponent
 	],
 	entryComponents:[
-		FallbackQueryWidgetComponent,	
+		FallbackQueryWidgetComponent,
+		FallbackQueryWidgetUnknownComponent,	
 	],
 })
 export class FallbackQueryWidgetsModule extends QWCModule{}

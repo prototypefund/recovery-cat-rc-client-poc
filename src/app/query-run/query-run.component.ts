@@ -39,21 +39,21 @@ export class QueryRunComponent {
 		
 	}
 
-	get trackSlides(){
+	public get trackSlides(){
 		return 	function(index, query){
 					this.queryOnSlide[index] = query
 					return query		
 				}.bind(this)
 	}
 
-	checkOff(){
+	public checkOff(){
 		let activeQuery	= this.activeQuery
 
 		this.activeQuery.submit()
 		.then( () => (activeQuery == this.activeQuery) && this.slides.slideNext() )
 	}
 
-	afterSlideChange(){
+	public afterSlideChange(){
 
 		this.slides.isBeginning()
 		.then( result => this.atStart = result )

@@ -26,13 +26,14 @@
     "@ionic/angular": "^5.0.7",
     "@ionic/pwa-elements": "^1.5.1",
     "core-js": "^2.5.4",
+    "rrule": "^2.6.4",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.803.24",
-    "@angular/cli": "^8.3.25",
+    "@angular-devkit/build-angular": "^0.803.26",
+    "@angular/cli": "^8.3.26",
     "@angular/compiler": "~8.2.14",
     "@angular/compiler-cli": "~8.2.14",
     "@angular/language-service": "~8.2.14",

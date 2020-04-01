@@ -3,7 +3,10 @@ import 	{
 			from 
 		}								from 'rxjs'
 
-import	{	Injectable }				from '@angular/core'
+import	{	
+			Injectable,
+			Inject 
+		}								from '@angular/core'
 import	{ 	Questionaire }				from './questionaire.service'
 import 	{ 	QuestionSource }			from './question-source.service'
 import	{ 	QuestionConfig }			from './question-config.interface'

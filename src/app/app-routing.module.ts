@@ -7,8 +7,10 @@ import 	{
 
 import	{	
 			SectionsModule,
-			QueriesSection 
-
+			QuerySection,
+			QueriesSection,
+			ReportingSchedulesOverviewSection,
+			ReportingScheduleSection,
 		}							from './sections'
 
 
@@ -17,6 +19,20 @@ const routes: Routes = 	[
 							{
 								path: 		'query-run',								
 								component:	QueriesSection,
+							},
+							{
+								path: 		'query/:id',								
+								component:	QuerySection,
+							},
+
+							{
+								path: 		'reporting-schedules',								
+								component:	ReportingSchedulesOverviewSection,
+							},
+
+							{
+								path: 		'reporting-schedules/:index',								
+								component:	ReportingScheduleSection,
 							},
 
 							{

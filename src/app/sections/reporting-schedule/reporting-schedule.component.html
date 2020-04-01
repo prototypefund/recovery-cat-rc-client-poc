@@ -1,0 +1,29 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref = "/reporting-schedules"></ion-back-button>
+		</ion-buttons>
+		<ion-title>
+			{{reportingSchedule?.source}}
+		</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding">
+	<p>{{reportingSchedule?.start | rccIgnoreTZ}}</p>
+
+	<ion-list>
+		<ion-item
+			*ngFor 			= "let item of reportingSchedule?.data"
+			[routerLink]	= "['/query',item.id]"
+		>
+			<ion-label>
+				<h3>
+					{{ (item.id | question | async )?.translations.en }}
+				</h3>
+				<p>{{item.RRule.toText()}}</p>
+			</ion-label>
+		</ion-item>
+
+	</ion-list>
+</ion-content>

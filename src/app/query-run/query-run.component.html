@@ -1,34 +1,26 @@
-<ion-header>
-	<ion-toolbar>
-		<ion-title>
-			RecoveryCat
-		</ion-title>
-	</ion-toolbar>
-</ion-header>
 
-<ion-content 
-	scroll-y	= "false"
+<ion-slides 
+	pager					= "false" 
+	[options]				= "slideOpts"
+	(ionSlideDidChange)		= "afterSlideChange()"
+	(ionSlidesDidLoad)		= "afterSlideChange()"
 >
-
-	<ion-slides 
-		pager					= "false" 
-		[options]				= "slideOpts"
-		(ionSlideDidChange)		= "afterSlideChange()"
-		(ionSlidesDidLoad)		= "afterSlideChange()"
+	<ion-slide 
+		*ngFor = "let query of queries trackBy: trackSlides"			
 	>
-		<ion-slide 
-			*ngFor = "let query of queries trackBy: trackSlides"			
+		<ion-content 
+			fullscreen
+			scroll-y	= "false"
+			class		= "ion-padding"
 		>
-			<ng-container 
-				[ngComponentOutlet] 			= "query | bestWidgetMatch" 
-				[ngComponentOutletInjector] 	= "query | injectQuery"
-			></ng-container>    
 
+			<rcc-query [query] = "query">
+			</rcc-query>
 
-		</ion-slide>
-	</ion-slides>
+		</ion-content>
+	</ion-slide>
+</ion-slides>
 
-</ion-content>
 
 <ion-footer color = "primary">
 	<ion-toolbar>
@@ -40,16 +32,16 @@
 			(click) 	= "slides.slidePrev()"
 			slot		= "start"
 		>
-			<ion-icon md="caret-back" ios="chevron-back-circle-outline"></ion-icon>
+			<ion-icon md = "caret-back" ios = "chevron-back-circle-outline"></ion-icon>
 		</ion-button>
 
 		<ion-button
-			color		= "success"
+			[color]		= "activeQuery?.complete ? 'success' : 'dark'"
 			[disabled] 	= "!activeQuery?.complete"
 			(click)		= "checkOff()"
 			expand		= "block"
 		>
-			<ion-icon name="checkmark"></ion-icon>
+			<ion-icon name = "checkmark"></ion-icon>
 		</ion-button>
 
 		<ion-button 		
@@ -59,7 +51,7 @@
 			(click) 	= "slides.slideNext()"
 			slot		= "end"
 		>
-			<ion-icon md="caret-forward" ios="chevron-forward-circle-outline"></ion-icon>
+			<ion-icon md = "caret-forward" ios = "chevron-forward-circle-outline"></ion-icon>
 		</ion-button>			
 		
 	</ion-toolbar>	

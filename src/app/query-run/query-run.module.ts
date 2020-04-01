@@ -11,9 +11,10 @@ import 	{ 	QueryRunComponent }			from './query-run.component'
 import	{	
 			BestWidgetMatchPipe,
 			InjectQueryPipe, 
-		}								from './best-widget-match.pipe'
-
-
+		}								from './query-run.pipes'
+import	{
+			QueryComponent			
+		}								from './query.component'
 import	{	Questionaire }				from '../questionaire'
 
 
@@ -29,9 +30,13 @@ import	{	Questionaire }				from '../questionaire'
 		QueryRunComponent,    
 		BestWidgetMatchPipe,
 		InjectQueryPipe,
+		QueryComponent
 	],
 	exports: [
+		InjectQueryPipe,
+		BestWidgetMatchPipe,
 		QueryRunComponent,
+		QueryComponent
 	],
 })
 export class QueryRunModule {}

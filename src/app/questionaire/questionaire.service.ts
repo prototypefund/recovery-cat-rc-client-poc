@@ -90,8 +90,7 @@ export class Questionaire {
 			
 		result.push(...new_questions)
 
-		ids
-		.forEach( id => !done[id] && result.push( new Question(id) ))
+		ids.forEach( id => !done[id] && result.push( new Question(id) ))
 
 		return result
 	}

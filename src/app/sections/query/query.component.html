@@ -1,0 +1,32 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref = "/reporting-schedules"></ion-back-button>
+		</ion-buttons>
+		
+		<ion-title>
+			Query 
+		</ion-title>
+		
+	</ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class = "ion-padding"> 
+	<rcc-query *ngIf = "query" [query] = query></rcc-query>
+</ion-content>
+
+
+<ion-footer color = "primary">
+	<ion-toolbar>
+
+		<ion-button
+			[color]		= "query?.complete ? 'success' : 'dark'"
+			[disabled] 	= "!query?.complete"
+			(click)		= "query.submit()"
+			expand		= "block"
+		>
+			<ion-icon name = "checkmark"></ion-icon>
+		</ion-button>
+
+	</ion-toolbar>	
+</ion-footer>
