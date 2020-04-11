@@ -11,6 +11,7 @@ import	{
 			QueriesSection,
 			ReportingSchedulesOverviewSection,
 			ReportingScheduleSection,
+			WebRTCSection,
 		}							from './sections'
 
 
@@ -33,6 +34,11 @@ const routes: Routes = 	[
 							{
 								path: 		'reporting-schedules/:index',								
 								component:	ReportingScheduleSection,
+							},
+
+							{
+								path: 		'webrtc',								
+								component:	WebRTCSection,
 							},
 
 							{

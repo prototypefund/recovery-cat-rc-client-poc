@@ -12,6 +12,8 @@ export type ReportingScheduleConfig = any[][]
 export class ReportingSchedule{
 
 	
+	private _config
+
 	public source
 	public start
 	public defaultRRule
@@ -25,6 +27,7 @@ export class ReportingSchedule{
 	}
 
 	private setup(config: ReportingScheduleConfig){
+		this._config 		= 	config
 		this.source			= 	config[0][0]
 		this.start			= 	new Date(config[0][1])
 		this.defaultRRule	= 	new RRule( {dtstart: this.start, ...RRule.parseString(config[0][2]) } )
@@ -42,6 +45,8 @@ export class ReportingSchedule{
 				.filter( 	item => typeof item == 'string')
 	}
 
+	get config()		{ return this._config }
+	get questionIds()	{ return this.data.map( item => item.id) }
 	
 
 }

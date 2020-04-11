@@ -1,0 +1,99 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			
+		</ion-buttons>
+
+		<ion-title>
+			{{title}}
+		</ion-title>
+
+		<ion-buttons slot="end">
+			<ion-button (click) = "dismiss()">
+				<ion-icon name="close"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+
+	</ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class = "ion-padding">
+	<div>
+		<div >
+			<qrcode 
+					[qrdata]				= "data|json" 
+					[width]					= "256" 
+					[errorCorrectionLevel]	= "'M'"
+			></qrcode>
+		</div>
+
+		<div *ngIf = "!complete">
+			<ion-progress-bar type="indeterminate"></ion-progress-bar>
+		</div>
+
+
+		<div *ngIf = "complete" >
+			<ion-icon 
+				color 	= "success" 
+				name 	= "checkmark-circle-outline"
+				size	= "large"
+			></ion-icon>
+			<br/>
+			All data transmitted.
+		</div>
+
+		<div *ngIf	= "error">
+			<ion-icon 
+				color 	= "danger" 
+				name 	= "alert-circle-outline"
+				size	= "large"
+			></ion-icon>
+			<br/>
+			Somethig went wrong: {{error}}
+		</div>
+	</div>
+
+</ion-content>
+
+<ion-footer class = "ion-no-border">
+
+	<ion-button 
+		*ngIf	= "!complete"
+		color 	= "primary" 
+		expand	= "block"
+		(click)	= "dismiss()"	
+	>
+		Cancel
+	</ion-button>
+
+	<ion-button 
+		*ngIf	= "error"
+		color 	= "primary" 
+		expand	= "block"
+		(click)	= "retry()"	
+	>
+		Retry
+	</ion-button>
+
+	<ion-button 
+		*ngIf	= "error"
+		color 	= "medium" 
+		expand	= "block"
+		(click)	= "dismiss()"	
+	>
+		Cancel
+	</ion-button>
+
+	<ion-button 
+		*ngIf	= "complete"
+		color 	= "success" 
+		expand	= "block"
+		(click)	= "dismiss()"	
+	>
+		Okay
+	</ion-button>
+
+</ion-footer>
+
+
+

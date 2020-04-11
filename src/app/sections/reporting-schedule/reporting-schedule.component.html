@@ -3,9 +3,17 @@
 		<ion-buttons slot="start">
 			<ion-back-button defaultHref = "/reporting-schedules"></ion-back-button>
 		</ion-buttons>
+
 		<ion-title>
 			{{reportingSchedule?.source}}
 		</ion-title>
+
+		<ion-buttons slot="end">
+			<ion-button (click) = "shareQR()">
+				<ion-icon name="qr-code-outline"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+
 	</ion-toolbar>
 </ion-header>
 

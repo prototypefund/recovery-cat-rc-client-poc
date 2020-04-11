@@ -15,6 +15,10 @@ import 	{ 	QueryRunModule }				from './query-run/query-run.module'
 import 	{ 	FallbackQueryWidgetsModule}		from './fallback-query-widgets'
 import	{	QWCService }					from './query-run/query-widget-components.service'
 
+import	{	ModalsModule }					from './modals'
+
+
+//TODO: create components for different list item types
 
 
 @NgModule({
@@ -24,7 +28,8 @@ import	{	QWCService }					from './query-run/query-widget-components.service'
 		BrowserModule, 
 		IonicModule.forRoot(), 
 		AppRoutingModule,	
-		QueryRunModule,			
+		ModalsModule,	
+		QueryRunModule,		
 		FallbackQueryWidgetsModule.atPriority(5),
 	],
 	providers: [		

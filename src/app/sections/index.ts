@@ -9,6 +9,7 @@ import	{	ReportingScheduleSection }			from './reporting-schedule/reporting-sched
 import	{	QueryRunModule }					from '../query-run/query-run.module'
 import	{	QuestionaireModule }				from '../questionaire'			
 import	{	SchedulingModule }					from '../schedules'
+import	{	WebRTCSection }						from './webrtc/webrtc.component'
 
 @NgModule({
 	imports:[
@@ -23,13 +24,15 @@ import	{	SchedulingModule }					from '../schedules'
 		QuerySection,
 		QueriesSection,
 		ReportingScheduleSection,
-		ReportingSchedulesOverviewSection
+		ReportingSchedulesOverviewSection,
+		WebRTCSection
 	],
 	exports:[
 		QuerySection,
 		QueriesSection,
 		ReportingScheduleSection,
-		ReportingSchedulesOverviewSection
+		ReportingSchedulesOverviewSection,
+		WebRTCSection
 	]
 })
 export class SectionsModule{}
@@ -40,3 +43,4 @@ export * from './query/query.component'
 export * from './queries/queries.component'
 export * from './reporting-schedules-overview/reporting-schedules-overview.component'
 export * from './reporting-schedule/reporting-schedule.component'
+export * from './webrtc/webrtc.component'

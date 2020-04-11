@@ -7,11 +7,29 @@
 		<ion-title>
 			Reporting Schedule
 		</ion-title>
+
 	</ion-toolbar>
 </ion-header>
 
 <ion-content>
 	<ion-list>
+		<ion-item button (click) = "scanQR()">
+
+			<ion-icon 
+				name 	= "qr-code-outline"
+				slot	= "start"
+			></ion-icon>
+
+			<ion-label>
+				Import Reporting Schedule
+			</ion-label>
+
+			<ion-icon 
+				name 	= "add-outline"				
+				slot	= "end"
+			></ion-icon>
+
+		</ion-item>
 		<ion-item
 			*ngFor 			= 	"let reportingSchedule of reportingSchedules; index as index"
 			[routerLink]	=	"[index]"

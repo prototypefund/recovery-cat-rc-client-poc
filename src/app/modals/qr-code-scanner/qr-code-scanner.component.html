@@ -1,0 +1,39 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-select 
+				*ngIf				= "availableDevices?.length > 1"				
+				[formControl]		= "currentDevice"
+				interface			= "popover"
+			>
+				<ion-select-option *ngFor ="let device of availableDevices" [value] = "device">
+					{{device?.label}}
+				</ion-select-option>	
+			</ion-select>
+		</ion-buttons>
+		
+
+		<ion-buttons slot="end">
+			<ion-button (click) = "dismiss()">
+				<ion-icon name="close"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+
+	</ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen >	
+
+	<div
+		class		= "scanner-shell" 
+		[hidden]	= "availableDevices.length == 0"		
+	>
+	
+		<zxing-scanner #scanner 
+			[device]		= "currentDevice.value"
+			[formats]		= "['QR_CODE', 'EAN_13', 'CODE_128', 'DATA_MATRIX']"
+		></zxing-scanner>
+
+	</div>
+
+</ion-content>

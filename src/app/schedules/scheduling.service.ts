@@ -3,12 +3,15 @@ import	{
 			ReportingSchedule,
 			ReportingScheduleConfig
 		}								from './reporting-schedule.class'
-
+import	{	Storage }					from '../services'
 import 	{	
 			RRule, 
 			RRuleSet, 
 			rrulestr 
 		} 								from 'rrule'
+// import	{
+// 			webrtc						
+// 		}								from '../services/webrtc.service'
 
 
 @Injectable({
@@ -20,7 +23,10 @@ export class SchedulingService{
  	private 		reportingSchedules:	ReportingSchedule[] = []
  	public			ready: 				Promise<any>
 
-	constructor(){
+	constructor(
+		private	storage:Storage,
+		//private webrtc: webrtc
+	){
 		this.ready 	=	this.restoreReportingSchedulesFromStorage()
 						.then( data	=> this.reportingSchedules = data) 
 						.then( () 	=> Promise.resolve() )
@@ -79,10 +85,19 @@ export class SchedulingService{
 	}
 
 
-	private async restoreReportingSchedulesFromStorage():Promise<any> {
-		let data = mock_data
+	private async restoreReportingSchedulesFromStorage():Promise<any> {		
 
-		return data.map( rsConfig => new ReportingSchedule(rsConfig) )
+		let data = await this.storage.read('reportingSchedules') || mock_data
+
+		// console.log('XXX', data)
+
+		// if(!data) data = mock_data
+
+		// let res = await this.storage.store('reportingSchedules', data)			
+
+		// console.log(res)
+
+		return (data as any).map( rsConfig => new ReportingSchedule(rsConfig) )
 	}
 
 

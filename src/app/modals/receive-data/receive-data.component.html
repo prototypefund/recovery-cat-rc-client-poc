@@ -1,0 +1,84 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			
+		</ion-buttons>
+
+		<ion-title>
+			{{title}}
+		</ion-title>
+
+		<ion-buttons slot="end">
+			<ion-button (click) = "dismiss()">
+				<ion-icon name="close"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+
+	</ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen >
+
+	<div>
+		<div *ngIf = "!complete">
+			<ion-spinner></ion-spinner>
+		</div>
+
+		<div *ngIf = "!complete">
+			Receiving data...
+		</div>	
+
+		<div *ngIf = "complete">
+			
+			<ion-icon 
+				color 	= "success" 
+				name 	= "checkmark-circle-outline"
+				size	= "large"
+			></ion-icon>
+			
+			<br/>
+			All data received.
+		</div>	
+
+		<ion-list>
+			<ion-item *ngFor = "let reportingSchedule of reportingSchedules">
+				<ion-icon name="time-outline" slot = "start"></ion-icon>
+				<ion-label>
+					<h2>{{reportingSchedule.source}}</h2>
+					<p>{{reportingSchedule.start | rccIgnoreTZ }}</p>
+				</ion-label>
+			</ion-item>	
+			<ion-item *ngFor = "let question of questions">
+				<ion-icon name="help-circle-outline" slot = "start"></ion-icon>
+				<ion-label>
+					<h2>{{question.translations.en}}</h2>
+					<p>{{questions.tags}}</p>
+				</ion-label>
+			</ion-item>
+		</ion-list>
+		
+	</div>
+
+</ion-content>	
+
+<ion-footer class = "ion-no-border">
+	<ion-toolbar>
+		<ion-button 
+			*ngIf	= "!complete"
+			color 	= "primary" 
+			expand	= "block"
+			(click)	= "dismiss()"	
+		>
+			Cancel
+		</ion-button> 
+
+		<ion-button 
+			*ngIf	= "complete"
+			color 	= "success" 
+			expand	= "block"
+			(click)	= "dismiss()"	
+		>
+			Okay
+		</ion-button> 
+	</ion-toolbar>
+</ion-footer>

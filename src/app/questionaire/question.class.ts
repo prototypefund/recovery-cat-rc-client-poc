@@ -82,6 +82,7 @@ export class Question implements QuestionConfig{
 
 	}
 
+	get config()	{ return this._config }
 
 	// public report$(): Observable<any>{
 
